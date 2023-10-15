@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Fares Ahmed Bakhit">
   <meta name="description" content="Fares' $HOME on the internet">
-  <title>Fares A. Bakhit{% if section.title %} - {{ section.title }}{% endif %}</title>
+  <title>Fares A. Bakhit{% if page.title %} - {{ page.title }}{% endif %}</title>
   <link rel="stylesheet" href="/style.css">
 </head>
 
@@ -19,6 +19,7 @@
   </nav>
 </header>
 
-<main>{% block content %}{% endblock %}</main>
+<main>{% block content %}{{ page.content | safe }}{% endblock %}</main>
+
 </body>
 </html>

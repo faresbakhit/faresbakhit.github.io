@@ -1,1 +1,7 @@
-{% extends "base.html" %}
+{% extends "page.html" %}
+
+{% block content %}
+{% for page in section.pages %}
+<p>{{ page.year }}-{{ page.month }}-{{ page.day }} <a href="{{ page.permalink | safe }}">{{ page.title }}</a></p>
+{% endfor %}
+{% endblock content %}
