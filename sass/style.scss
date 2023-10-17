@@ -14,7 +14,7 @@ body {
   justify-content: space-between;
   margin: 0 auto;
   max-width: 768px;
-  min-height: calc(100vh - 3px);
+  min-height: calc(100dvh - 3px);
 }
 
 header {
@@ -51,7 +51,13 @@ a:hover {
   text-decoration: underline;
 }
 
-@media (max-width: 583px) {
+@media (max-width: 390px) {
+  footer {
+    font-size: 0.78em
+  }
+}
+
+@media (max-width: 580px) {
   header {
     flex-direction: column;
     gap: 12px;
