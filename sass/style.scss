@@ -1,49 +1,45 @@
 $color-red: #bb5649;
 $color-black: #333333;
+$color-grey: #e6e6e6;
 
 html {
   border-top: 3px solid $color-red;
   font-family: serif;
-  color: $color-black
+  color: $color-black;
 }
 
 body {
-  width: 768px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 0 auto;
-
-  @media (max-width: 838px) {
-    width: unset;
-  }
+  max-width: 768px;
+  min-height: calc(100vh - 3px);
 }
 
 header {
+  font-size: 24px;
   padding: 35px;
-  margin-bottom: 35px;
-
+  border-bottom: 1px solid $color-grey;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: 535px) {
-    flex-direction: column
-  }
-
-
-  font-size: 24px;
   nav {
+    font-size: 20px;
     display: flex;
     gap: 20px;
-    font-size: 20px;
-    a { color: $color-black; }
   }
-
-  border-bottom: 1px solid #e6e6e6;
 }
 
 main {
-  @media (max-width: 838px) {
-    padding: 0 35px
-  }
+  margin: 35px 0;
+  line-height: 1.6;
+}
+
+footer {
+  padding: 35px;
+  border-top: 1px solid $color-grey;
 }
 
 a {
@@ -55,7 +51,19 @@ a:hover {
   text-decoration: underline;
 }
 
-pre {
-  padding: 25px;
-  overflow-x: auto;
+@media (max-width: 583px) {
+  header {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 838px) {
+  main {
+    padding: 0 35px;
+  }
+
+  body {
+    max-width: unset;    
+  }
 }

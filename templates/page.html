@@ -2,24 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Fares Ahmed Bakhit">
   <meta name="description" content="Fares' $HOME on the internet">
   <title>Fares A. Bakhit{% if page.title %} - {{ page.title }}{% endif %}</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
 </head>
 
 <body>
-<header>
-  <a href="/">Fares A. Bakhit</a>
-  <nav>
-    <a href="/tags.html">Tags</a>
-    <a href="/resume.html">Resume</a>
-    <a href="/about.html">About</a>
-  </nav>
-</header>
+  <div>
+    <header>
+      <a href="{{ get_url(path="") }}">Fares A. Bakhit</a>
+      <nav>
+        <a href="">Projects</a>
+        <a href="">Resume</a>
+        <a href="">About</a>
+      </nav>
+    </header>
 
-<main>{% block content %}{{ page.content | safe }}{% endblock %}</main>
+    <main>{% block content %}{{ page.content | safe }}{% endblock %}</main>
+  </div>
 
+  <footer>
+    Copyright (c) 2023 Fares A. Bakhit<br>
+    Email:
+    <code>faresa.bakhit [at] gmail [dot] com</code><br>
+    Profiles:
+    <a href="https://github.com/faresbakhit">GitHub</a>,
+    <a href="https://linkedin.com/in/faresahmed">LinkedIn</a>
+  </footer>
 </body>
 </html>

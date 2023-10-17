@@ -4,12 +4,9 @@ title = "Hello, world!"
 
 # [Hello, world!](#hello-world)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget sem tortor. Sed bibendum a lacus et mollis. Mauris vel placerat elit. Aenean ut est elit. Mauris at risus urna. Aliquam erat volutpat. Morbi aliquet augue nibh, eget feugiat tellus porttitor in. In iaculis tempus tincidunt. Suspendisse tempus mauris nec arcu pulvinar aliquet. Phasellus sed interdum risus. Quisque eleifend libero in laoreet tempus. Fusce non mauris odio. Donec ullamcorper lorem ex, nec maximus justo bibendum id. Aenean eu nisl hendrerit, dictum turpis at, condimentum mi.
+This is the first blog post of many to come (hopefully). I've just finished
+polishing the bases of the website (e.g. layout, css, etc). The site uses
+[zola](https://www.getzola.org/), a static site generator, and a thin layer
+of css.
 
-Vivamus lectus metus, venenatis id elementum vitae, vehicula a dolor. Curabitur at arcu et quam gravida lobortis et in nulla. Praesent ut gravida mi. Morbi ac ultricies odio. Suspendisse risus nunc, venenatis a fermentum et, facilisis ut orci. Cras nec condimentum neque, at volutpat purus. Etiam finibus placerat mauris ac pharetra. Nam sit amet scelerisque est. Vivamus non facilisis odio, nec faucibus libero. Sed ullamcorper ultricies augue, ac iaculis nisl placerat quis. Donec sollicitudin scelerisque lacus, quis imperdiet sapien suscipit ut. Cras ullamcorper dapibus neque, id volutpat ante.
-
-Praesent at ipsum dignissim, volutpat leo ut, fringilla ligula. Maecenas ullamcorper purus ac nibh scelerisque, quis elementum odio viverra. Ut sit amet placerat est, vitae dapibus nulla. Mauris posuere tincidunt nisi in egestas. Aliquam et mi non mi mattis fermentum nec in leo. Integer aliquam nibh velit, at mattis risus fermentum eu. Etiam imperdiet ex vel velit pulvinar pellentesque.
-
-Suspendisse congue ligula velit. Vivamus imperdiet, ante at egestas feugiat, metus diam fringilla est, at vestibulum justo justo a nibh. Mauris quis dictum neque. Maecenas rutrum est vitae faucibus commodo. Nullam a commodo nisl. Integer ut varius enim. Cras blandit sem ac lacus sagittis dapibus. Fusce ultricies erat sem, in dictum nisi lobortis ac. Duis finibus ultrices eros eget pulvinar. Donec interdum sollicitudin velit, ac laoreet ligula ultricies a. Phasellus ac suscipit tellus, ac finibus diam. Nam tempus nisl in sapien vestibulum, quis laoreet odio congue. Sed nunc urna, mollis eu venenatis nec, pulvinar et felis. Nam faucibus eleifend justo, nec suscipit velit. Pellentesque accumsan fringilla convallis.
-
-Morbi metus nibh, mollis et luctus at, ultrices condimentum nulla. Duis tempor tincidunt arcu, nec vulputate lectus lobortis sed. Vivamus massa sapien, ornare non mi in, pharetra porta est. Mauris rhoncus vitae velit lobortis convallis. Pellentesque ullamcorper volutpat leo, at elementum leo lacinia nec. Phasellus hendrerit purus orci, non porta arcu laoreet vitae. Vestibulum eu lacinia risus.
+Some pages are still not there but they will, soon!
