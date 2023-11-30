@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 import os
+import re
 import sys
 import json
-from typing import IO, NoReturn
+from typing import IO, NoReturn, cast, Any
 from string import Template
 from collections.abc import Mapping, Callable
 
@@ -16,27 +17,60 @@ OSMKDIR_MODE = 0o755
 NEWLINE = "\n"
 TEXT_ENCODING = "utf-8"
 
-if os.getenv("GENPY_NO_LOG") is None:
-    log = print
-else:
-
-    def log(*args, **kwargs) -> None:
-        pass
-
 
 def error(msg: str, *args: object, prefix: str = "error: ") -> NoReturn:
-    """print the arguments to stderr and exit with status code 1"""
-    indent = lambda o: len(prefix) * " " + str(o)
     print(
         prefix + msg,
-        *map(indent, args),
+        *map(lambda obj: " "*len(prefix) + str(obj), args),
         file=sys.stderr,
         sep=NEWLINE,
     )
     sys.exit(1)
 
 
-def collect_json_object(fp: IO[bytes]) -> tuple[str, bool]:
+def minify_css(css: str) -> str:
+    """source: https://stackoverflow.com/a/223689"""
+
+    # remove comments - this will break a lot of hacks :-P
+    css = re.sub(r'\s*/\*\s*\*/', "$$HACK1$$", css) # preserve IE<6 comment hack
+    css = re.sub(r'/\*[\s\S]*?\*/', "", css)
+    css = css.replace("$$HACK1$$", '/**/') # preserve IE<6 comment hack
+
+    # url() doesn't need quotes
+    css = re.sub(r'url\((["\'])([^)]*)\1\)', r'url(\2)', css)
+
+    # spaces may be safely collapsed as generated content will collapse them anyway
+    css = re.sub(r'\s+', ' ', css)
+
+    # shorten collapsable colors: #aabbcc to #abc
+    css = re.sub(r'#([0-9a-f])\1([0-9a-f])\2([0-9a-f])\3(\s|;)', r'#\1\2\3\4', css)
+
+    # fragment values can loose zeros
+    css = re.sub(r':\s*0(\.\d+([cm]m|e[mx]|in|p[ctx]))\s*;', r':\1;', css)
+
+    out = ""
+    for rule in re.findall(r'([^{]+){([^}]*)}', css):
+
+        # we don't need spaces around operators
+        selectors = [re.sub(r'(?<=[\[\(>+=])\s+|\s+(?=[=~^$*|>+\]\)])', r'', selector.strip()) for selector in rule[0].split(',')]
+
+        # order is important, but we still want to discard repetitions
+        properties = {}
+        porder: list[Any] = []
+        for prop in re.findall('(.*?):(.*?)(;|$)', rule[1]):
+            key = prop[0].strip().lower()
+            if key not in porder:
+                porder.append(key)
+            properties[key] = prop[1].strip()
+
+        # output rule if it contains any declarations
+        if properties:
+            out += "%s{%s}" % (','.join(selectors), ''.join(['%s:%s;' % (key, properties[key]) for key in porder])[:-1])
+
+    return out
+
+
+def collect_json_object(fp: IO[bytes]) -> tuple[bytes, bool]:
     """Returns the read string and if the file has a JSON object start"""
     object_buf = b"{"
     open_ldels = 1
@@ -54,7 +88,7 @@ def collect_json_object(fp: IO[bytes]) -> tuple[str, bool]:
 
 
 def load_template_s(filepath: str) -> bytes:
-    log(f"load({filepath!r})")
+    print(f"load({filepath!r})")
 
     with open(filepath, "rb") as fp:
         json_object_s, has_object_start = collect_json_object(fp)
@@ -65,7 +99,8 @@ def load_template_s(filepath: str) -> bytes:
                 json_object = json.loads(json_object_s)
             except json.JSONDecodeError as exc:
                 rel_filepath = os.path.relpath(filepath, ".")
-                error("./{rel_filepath}:{exc.lineno}:{exc.colno}: {exc.msg}")
+                error(f"./{rel_filepath}:{exc.lineno}:{exc.colno}: {exc.msg}")
+            json_object = cast(dict[str, Any], json_object)
         else:
             file_content += json_object_s
         file_content += fp.read()
@@ -85,12 +120,21 @@ def load_template_s(filepath: str) -> bytes:
 
     includes = json_object.get("includes")
     if isinstance(includes, Mapping):
+        includes = cast(Mapping[str, Any], includes)
         for key, filepath in includes.items():
+            application = None
+            if isinstance(filepath, Mapping):
+                application = filepath["apply"]
+                filepath = filepath["path"]
             if not os.path.isabs(filepath):
                 filepath = os.path.join(ROOT_DIR_PATH, filepath)
-            log(f"include({filepath!r})")
+            print(f"include({filepath!r})")
             with open(filepath, encoding=TEXT_ENCODING, newline=NEWLINE) as fp:
-                json_object[key] = fp.read()
+                s = fp.read()
+            if application is not None:
+                if application == "css-minify":
+                    s = minify_css(s)
+            json_object[key] = s
 
     return template.safe_substitute(json_object).encode(TEXT_ENCODING)
 
@@ -107,13 +151,13 @@ def rm_missing_pages(
             os.path.relpath(path, OUTPUT_DIR_PATH),
         )
         if not os.path.exists(page_path):
-            log(f"rm({path!r})")
+            print(f"rm({path!r})")
             rm(path)
 
 
 def main() -> None:
     if not os.path.exists(OUTPUT_DIR_PATH):
-        log(f"mkdir({OUTPUT_DIR_PATH!r})")
+        print(f"mkdir({OUTPUT_DIR_PATH!r})")
         os.mkdir(OUTPUT_DIR_PATH, mode=OSMKDIR_MODE)
 
     for dirpath, dirnames, filenames in os.walk(PAGES_DIR_PATH):
@@ -121,7 +165,7 @@ def main() -> None:
         for dirname in dirnames:
             tomkdir = os.path.join(OUTPUT_DIR_PATH, reldirpath, dirname)
             if not os.path.exists(tomkdir):
-                log(f"mkdir({tomkdir!r})")
+                print(f"mkdir({tomkdir!r})")
                 os.mkdir(tomkdir, mode=OSMKDIR_MODE)
 
         for filename in filenames:
@@ -131,14 +175,14 @@ def main() -> None:
                 template_s = load_template_s(filepath)
             except OSError as exc:
                 rel_filepath = os.path.relpath(filepath, ".")
-                error("./{rel_filepath}: {exc.filename}: {exc.strerror}")
+                error(f"./{rel_filepath}: {exc.filename}: {exc.strerror}")
 
             output_filepath = os.path.join(
                 OUTPUT_DIR_PATH,
                 os.path.relpath(filepath, PAGES_DIR_PATH),
             )
             with open(output_filepath, "wb") as fp:
-                log(f"write({output_filepath!r})")
+                print(f"write({output_filepath!r})")
                 fp.write(template_s)
 
     for dirpath, dirnames, filenames in os.walk(OUTPUT_DIR_PATH, topdown=False):
