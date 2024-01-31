@@ -1,0 +1,85 @@
+---
+template: base.html
+---
+
+## Pythagorean Identities
+
+$$`
+\begin{align*}
+    \sin^2{x}+\cos^2{x}=1 \\
+    \tan^2{x}+1=\sec^2{x} \\
+    1+\cot^2{x}=\csc^2{x}
+\end{align*}
+`
+
+## Even/Odd Formulas
+
+$$`
+\begin{align*}
+    \sin(-x)&=-\sin{x}&&\csc(-x)=-\csc{x} \\
+    \cos(-x)&=\cos{x}&&\sec(-x)=\sec{x} \\
+    \tan(-x)&=-\tan{x}&&\cot(-x)=-\cot{x}
+\end{align*}
+`
+
+## Periodic Formulas
+
+$$`
+\begin{align*}
+    \sin(x+2\pi n)&=\sin{x}&&\csc(x+2\pi n)=\csc{x} \\
+    \cos(x+2\pi n)&=\cos{x}&&\sec(x+2\pi n)=\sec{x} \\
+    \tan(x+\pi n)&=\tan{x}&&\cot(x+\pi n)=\cot{x}
+\end{align*}
+`
+
+## Cofunction Formulas
+
+$$`
+\begin{align*}
+    \sin(\tfrac{\pi}{2} - x)&=\cos{x}&&\cos(\tfrac{\pi}{2} - x)=\sin{x} \\
+    \sec(\tfrac{\pi}{2} - x)&=\csc{x}&&\csc(\tfrac{\pi}{2} - x)=\sec{x} \\
+    \tan(\tfrac{\pi}{2} - x)&=\cot{x}&&\cot(\tfrac{\pi}{2} - x)=\tan{x}
+\end{align*}
+`
+
+## Sum and Difference Formulas
+
+$$`
+\begin{align*}
+    \sin(x \pm y)&=\sin{x}\cos{y} \pm \cos{x}\sin{y} \\[1ex]
+    \cos(x \pm y)&=\cos{x}\cos{y} \mp \sin{x}\sin{y} \\[1ex]
+    \tan(x \pm y)&=\frac{\tan{x} \pm \tan{y}}{1\mp\tan{x}\tan{y}}
+\end{align*}
+`
+
+## Double Angle Formulas
+
+$$`
+\begin{align*}
+    \sin{2x}&=2\sin{x}\cos{x} \\[1ex]
+    \cos{2x}&=\cos^2{x}-\sin^2{x} \\
+            &=2\cos^2{x}-1 \\
+            &=1-2\sin^2{x} \\[1ex]
+    \tan{2x}&=\frac{2\tan{x}}{1-\tan^2{x}}
+\end{align*}
+`
+
+## Half Angle Formulas
+
+$$`
+\begin{align*}
+    \sin^2{x}&=\frac{1-\cos{2x}}{2} \\[2ex]
+    \cos^2{x}&=\frac{1+\cos{2x}}{2} \\[2ex]
+    \tan^2{x}&=\frac{1-\cos{x}}{1+\cos{x}}
+\end{align*}
+`
+
+## Product Formulas
+
+$$`
+\begin{align*}
+    \sin{x}\sin{y}&=\tfrac{1}{2}[\cos(x-y)-\cos(x+y)] \\[2ex]
+    \sin{x}\cos{y}&=\tfrac{1}{2}[\sin(x-y)+\sin(x+y)] \\[2ex]
+    \cos{x}\cos{y}&=\tfrac{1}{2}[\cos(x-y)+\cos(x+y)]
+\end{align*}
+`

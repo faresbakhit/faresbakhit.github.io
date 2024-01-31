@@ -1,0 +1,14 @@
+{
+    "name": "faresbakhit.github.io",
+    "private": true,
+    "version": "0.1.0",
+    "main": "index.js",
+    "dependencies": {
+        "@djot/djot": "^0.2.5",
+        "alive-server": "^1.3.0",
+        "chokidar": "^3.5.3",
+        "gray-matter": "^4.0.3",
+        "katex": "^0.16.9",
+        "mustache": "^4.2.0"
+    }
+}

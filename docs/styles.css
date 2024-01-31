@@ -7,18 +7,16 @@
 :root {
     font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
     color: var(--color-text);
-
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-
     -moz-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
-
     box-sizing: border-box;
     border-top: 3px solid var(--color-highlight);
     height: 100%;
+    overflow-y: scroll;
 }
 
 ::selection {
@@ -41,6 +39,13 @@ nav {
     border-bottom: 1px solid var(--color-breakings);
     display: flex;
     justify-content: space-between;
+}
+
+nav .subtitle {
+    color: #757575;
+    font-size: 1rem;
+    font-style: italic;
+    margin: 0;
 }
 
 nav ul {
@@ -67,6 +72,7 @@ main {
 }
 
 footer {
+    font-size: min(1em, 3vw);
     padding: 35px 0;
     border-top: 1px solid var(--color-breakings);
     line-height: 1.5;
@@ -93,12 +99,6 @@ footer {
 :any-link:focus.link-blank {
     text-decoration-line: line-through;
     text-decoration-style: solid;
-}
-
-@media (max-width: 390px) {
-    footer {
-        font-size: .78em
-    }
 }
 
 @media (max-width: 638px) {
