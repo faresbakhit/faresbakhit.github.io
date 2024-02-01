@@ -1,0 +1,24 @@
+Hey stranger :), this is the humans.txt for my personal webpage.
+
+The idea of this file (as I've grasped) is to document the _humans_ behind
+a webpage that made it possible, even if not directly.
+
+I'm not using a static site generator (jekyll, hugo, etc.), instead I've put
+together a small nodejs script (~100 lines) with a few dependencies to build
+the website locally, review the contents, then publish it on GitHub pages.
+
+Build source code:
+https://github.com/faresbakhit/faresbakhit.github.io
+
+One particular project that I'm very glad exists is KaTeX, the library I use
+for pre-rendering math to HTML/CSS so you wouldn't have to do it client-side,
+let alone run any JavaScript.
+
+KaTeX's webpage:
+https://katex.org/
+
+I use Djot, a lightweight markup language, together with the JavaScript
+implementation for writing and converting the files to HTML.
+
+Djot's webpage: https://djot.net/
+Djot's JavaScript implementation: https://github.com/jgm/djot.js
