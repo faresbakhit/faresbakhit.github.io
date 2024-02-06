@@ -32,7 +32,7 @@ $$`
 \end{align*}
 `
 
-## Cofunction Formulas
+## Co-function Formulas
 
 $$`
 \begin{align*}
@@ -64,7 +64,7 @@ $$`
 \end{align*}
 `
 
-## Half Angle Formulas
+## Power Reduction Formulas
 
 $$`
 \begin{align*}
@@ -80,6 +80,8 @@ $$`
 \begin{align*}
     \sin{x}\sin{y}&=\tfrac{1}{2}[\cos(x-y)-\cos(x+y)] \\[2ex]
     \sin{x}\cos{y}&=\tfrac{1}{2}[\sin(x-y)+\sin(x+y)] \\[2ex]
-    \cos{x}\cos{y}&=\tfrac{1}{2}[\cos(x-y)+\cos(x+y)]
+    \cos{x}\cos{y}&=\tfrac{1}{2}[\cos(x-y)+\cos(x+y)] \\[2ex]
+    \tan{x}\tan{y}&=\frac{\cos(x-y)-\cos(x+y)}{\cos(x-y)+\cos(x+y)} \\[3ex]
+    \tan{x}\cot{y}&=\frac{\sin(x-y)+\sin(x+y)}{\sin(y-x)+\sin(y+x)}
 \end{align*}
 `

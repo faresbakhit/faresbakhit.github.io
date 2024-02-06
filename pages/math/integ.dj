@@ -1,0 +1,117 @@
+---
+template: base.html
+---
+
+## Properties of Definite Integrals
+
+1. Order of Integration: $$`\int_a^b{f(x)\mathop{dx}}=-\int_b^a{f(x)\mathop{dx}}`
+2. Zero Width Interval: $$`\int^a_a{f(x)\mathop{dx}}=0`
+3. Constant Multiple: $$`\int_a^b{kf(x)\mathop{dx}}=k\int_a^b{f(x)\mathop{dx}}`
+4. Sum and Difference: $$`\int_a^b{(f(x) \pm g(x))\mathop{dx}}=\int_a^b{f(x)\mathop{dx}} \pm \int_a^b{g(x)\mathop{dx}}`
+5. Additivity:
+    $$`
+        \begin{align*}
+        \int_a^b{f(x)\mathop{dx}}+\int_b^c{f(x)\mathop{dx}}=\int_a^c{f(x)\mathop{dx}} \\[2ex]
+        \end{align*}
+    `
+6. Domination, and Max-Min Inequality:
+
+    1. If $`f(x) \geqslant 0` for $`a \leqslant x \leqslant b`, then
+        $$`
+            \begin{align*}
+            \int_a^b{f(x)\mathop{dx}} \geqslant 0 \\[2ex]
+            \end{align*}
+        `
+    2. If $`f(x) \geqslant g(x)` for $`a \leqslant x \leqslant b`, then
+        $$`
+            \begin{align*}
+            \int_a^b{f(x)\mathop{dx}} \geqslant \int_a^b{g(x)\mathop{dx}} \\[2ex]
+            \end{align*}
+        `
+    3. If $`m \leqslant f(x) \leqslant M` for $`a \leqslant x \leqslant b`, then $$`m(b-a) \leqslant \int_a^b{f(x)\mathop{dx}} \leqslant M(b-a)`
+
+## Common Nonstandard Integrals
+
+_note: integration constant is omitted._
+
+$$`
+\begin{align*}
+\int{\sin^{-1}{x}\mathop{dx}} &= x\sin^{-1}{x} + \sqrt{1 - x^2} \\
+\int{\ln{x}\mathop{dx}} &= x\ln{x} - x \\
+\int{\cos^2{x}\mathop{dx}} &= \tfrac{1}{2}x+\tfrac{1}{4}\sin(2x) \\
+\int{\sin^2{x}\mathop{dx}} &= \tfrac{1}{2}x-\tfrac{1}{4}\sin(2x) \\
+\int{\tan^2{x}\mathop{dx}} &= \tan{x} - x \\
+\int{\sec^3{x}\mathop{dx}} &= \tfrac{1}{2}\sec{x}\tan{x} + \tfrac{1}{2}\ln|\sec{x} + \tan{x}| \\
+\int{e^x\cos{x}\mathop{dx}} &= \tfrac{1}{2}e^x(\sin{x} + \cos{x}) \\
+\int{e^x\sin{x}\mathop{dx}} &= \tfrac{1}{2}e^x(\sin{x} - \cos{x}) \\
+\int{xe^x\mathop{dx}} &= e^x(x - 1) \\
+\int{x^4e^x\mathop{dx}} &= e^x(x^4 - 4x^3 + 12x^2 - 24x + 24) \\
+\end{align*}
+`
+
+## Problems
+
+``` =html
+<details>
+<summary>Problem 1
+```
+
+$$`\int{\frac{\mathop{dx}}{\sqrt{x}(1+x)}}`
+
+``` =html
+</summary>
+```
+\
+$$`
+\begin{equation*}
+  \begin{split}
+    \int{\frac{\mathop{dx}}{\sqrt{x}(1+x)}} &= 2\int{\frac{u}{u(1+u^2)}}\mathop{du} \\[3ex]
+    &=2\int{\frac{1}{1+u^2}}\mathop{du} \\[3ex]
+    &=2\tan^{-1}{u} + C \\[2ex]
+    &=2\tan^{-1}{\sqrt{x}} + C \\
+  \end{split}
+\quad\quad
+  \begin{split}
+    u &= \sqrt{x} \\
+    u^2 &= x \\
+    2u\mathop{du} &= \mathop{dx}
+  \end{split}
+\end{equation*}
+`
+
+``` =html
+</details>
+```
+
+``` =html
+<details>
+<summary>Problem 2
+```
+
+$$`\int{x\tan^2{x}\mathop{dx}}`
+
+
+``` =html
+</summary>
+```
+\
+
+$$`
+\begin{align*}
+u &= x & \mathop{dv} &= \tan^2{x}\mathop{dx} \\
+\mathop{du} &= \mathop{dx} & v &= \tan{x} - x
+\end{align*}
+`
+
+$$`
+\begin{align*}
+\int{x\tan^2{x}\mathop{dx}} &= x(\tan{x}-x)-\int{(\tan{x}-x)\mathop{dx}} \\
+&= x(\tan{x}-x) - \ln|\sec{x}| + \tfrac{1}{2}x^2 + C \\
+&= x\tan{x} - x^2 - \ln|\sec{x}| + \tfrac{1}{2}x^2 + C \\
+&= x\tan{x} - \ln|\sec{x}| - \tfrac{1}{2}x^2 + C
+\end{align*}
+`
+
+``` =html
+</details>
+```

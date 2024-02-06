@@ -1,7 +1,18 @@
 ---
-template: frontpage.html
+template: base.html
 ---
+
+``` =html
+<picture>
+    <source srcset="/images/fares-widescreen-photograph.jpg" media="(max-width: 838px)">
+    <img class="main-photo" width=220 height=220 alt="A photograph of Fares in front of Cairo University's Dome" src="/images/fares-square-photograph.jpg">
+</picture>
+```
 
 I'm studying at the Faculty of Computers and Artificial Intelligence, Cairo University for a bachelor's degree in Computer Science.
 
 Have been activly, and passionately learning Software Engineering, and still, since the age of 14. And throughout the years contributed to the open-source community many times.
+
+Check out my [writings](/writings){.link-blank .link-onsite}.
+
+Personal system: [Void Linux](https://voidlinux.org/), [i3wm](https://i3wm.org/), [Alacritty](https://alacritty.org/), [Helix](https://alacritty.org/).
