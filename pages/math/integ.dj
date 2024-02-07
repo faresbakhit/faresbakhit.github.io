@@ -9,26 +9,27 @@ template: base.html
 3. Constant Multiple: $$`\int_a^b{kf(x)\mathop{dx}}=k\int_a^b{f(x)\mathop{dx}}`
 4. Sum and Difference: $$`\int_a^b{(f(x) \pm g(x))\mathop{dx}}=\int_a^b{f(x)\mathop{dx}} \pm \int_a^b{g(x)\mathop{dx}}`
 5. Additivity:
-    $$`
-        \begin{align*}
-        \int_a^b{f(x)\mathop{dx}}+\int_b^c{f(x)\mathop{dx}}=\int_a^c{f(x)\mathop{dx}} \\[2ex]
-        \end{align*}
-    `
+  $$`
+    \begin{align*}
+    \int_a^b{f(x)\mathop{dx}}+\int_b^c{f(x)\mathop{dx}}=\int_a^c{f(x)\mathop{dx}} \\[2ex]
+    \end{align*}
+  `
 6. Domination, and Max-Min Inequality:
 
-    1. If $`f(x) \geqslant 0` for $`a \leqslant x \leqslant b`, then
-        $$`
-            \begin{align*}
-            \int_a^b{f(x)\mathop{dx}} \geqslant 0 \\[2ex]
-            \end{align*}
-        `
-    2. If $`f(x) \geqslant g(x)` for $`a \leqslant x \leqslant b`, then
-        $$`
-            \begin{align*}
-            \int_a^b{f(x)\mathop{dx}} \geqslant \int_a^b{g(x)\mathop{dx}} \\[2ex]
-            \end{align*}
-        `
-    3. If $`m \leqslant f(x) \leqslant M` for $`a \leqslant x \leqslant b`, then $$`m(b-a) \leqslant \int_a^b{f(x)\mathop{dx}} \leqslant M(b-a)`
+  1. If $`f(x) \geqslant 0` for $`a \leqslant x \leqslant b`, then:
+    $$`
+      \begin{align*}
+      \int_a^b{f(x)\mathop{dx}} \geqslant 0 \\[2ex]
+      \end{align*}
+    `
+  2. If $`f(x) \geqslant g(x)` for $`a \leqslant x \leqslant b`, then:
+    $$`
+      \begin{align*}
+      \int_a^b{f(x)\mathop{dx}} \geqslant \int_a^b{g(x)\mathop{dx}} \\[2ex]
+      \end{align*}
+    `
+  3. If $`m \leqslant f(x) \leqslant M` for $`a \leqslant x \leqslant b`, then:
+    $$`m(b-a) \leqslant \int_a^b{f(x)\mathop{dx}} \leqslant M(b-a)`
 
 ## Common Nonstandard Integrals
 
@@ -36,7 +37,6 @@ _note: integration constant is omitted._
 
 $$`
 \begin{align*}
-\int{\sin^{-1}{x}\mathop{dx}} &= x\sin^{-1}{x} + \sqrt{1 - x^2} \\
 \int{\ln{x}\mathop{dx}} &= x\ln{x} - x \\
 \int{\cos^2{x}\mathop{dx}} &= \tfrac{1}{2}x+\tfrac{1}{4}\sin(2x) \\
 \int{\sin^2{x}\mathop{dx}} &= \tfrac{1}{2}x-\tfrac{1}{4}\sin(2x) \\
@@ -44,8 +44,8 @@ $$`
 \int{\sec^3{x}\mathop{dx}} &= \tfrac{1}{2}\sec{x}\tan{x} + \tfrac{1}{2}\ln|\sec{x} + \tan{x}| \\
 \int{e^x\cos{x}\mathop{dx}} &= \tfrac{1}{2}e^x(\sin{x} + \cos{x}) \\
 \int{e^x\sin{x}\mathop{dx}} &= \tfrac{1}{2}e^x(\sin{x} - \cos{x}) \\
-\int{xe^x\mathop{dx}} &= e^x(x - 1) \\
-\int{x^4e^x\mathop{dx}} &= e^x(x^4 - 4x^3 + 12x^2 - 24x + 24) \\
+\int{e^xx\mathop{dx}} &= e^x(x - 1) \\
+\int{\sin^{-1}{x}\mathop{dx}} &= x\sin^{-1}{x} + \sqrt{1 - x^2} \\
 \end{align*}
 `
 
@@ -109,6 +109,95 @@ $$`
 &= x(\tan{x}-x) - \ln|\sec{x}| + \tfrac{1}{2}x^2 + C \\
 &= x\tan{x} - x^2 - \ln|\sec{x}| + \tfrac{1}{2}x^2 + C \\
 &= x\tan{x} - \ln|\sec{x}| - \tfrac{1}{2}x^2 + C
+\end{align*}
+`
+
+``` =html
+</details>
+```
+
+``` =html
+<details>
+<summary>Problem 3
+```
+
+$$`\int{\frac{x\sec{x}}{\sec{x}+\tan{x}}\mathop{dx}}`
+
+``` =html
+</summary>
+```
+\
+
+$$`
+\begin{align*}
+\int{\frac{x\sec{x}}{\sec{x}+\tan{x}}\mathop{dx}}&=\int{\frac{x}{1+\sin{x}}\mathop{dx}} \\[3ex]
+&=\int{\frac{x(1-\sin{x})}{1-\sin^2{x}}\mathop{dx}} \\[3ex]
+&=\int{\frac{x(1-\sin{x})}{\cos^2{x}}\mathop{dx}} \\[3ex]
+&=\int{\frac{x-x\sin{x}}{\cos^2{x}}\mathop{dx}} \\[3ex]
+&=\int{\frac{x}{\cos^2{x}}\mathop{dx}}-\int{\frac{x\sin{x}}{\cos^2{x}}\mathop{dx}} \\[3ex]
+&=\int{x\sec^2{x}\mathop{dx}}-\int{x\sec{x}\tan{x}\mathop{dx}} \\[3ex]
+&=(x\tan{x}-\int{\tan{x}\mathop{dx}}) - (x\sec{x}-\int{\sec{x}\mathop{dx}}) \\[3ex]
+&=x\tan{x}-x\sec{x}-\int{\tan{x}\mathop{dx}}+\int{\sec{x}\mathop{dx}} \\[3ex]
+&=x\tan{x}-x\sec{x}-\ln|\sec{x}|+\ln|\sec{x}+\tan{x}| + C\\[3ex]
+&=x(\tan{x}-\sec{x})+\ln|\sec{x}+\tan{x}|-\ln|\sec{x}| + C\\[3ex]
+&=x(\tan{x}-\sec{x})+\ln|\frac{\sec{x}+\tan{x}}{\sec{x}}| + C \\[3ex]
+&=\frac{x\sin{x}-x}{\cos{x}}+\ln|1+\sin{x}| + C \\[3ex]
+\end{align*}
+`
+
+``` =html
+</details>
+```
+
+``` =html
+<details>
+<summary>Problem 4
+```
+
+$$`\int{\frac{1}{\ln{x}} + x\ln(\ln{x})\mathop{dx}}`
+
+``` =html
+</summary>
+```
+\
+
+$$`
+\begin{align*}
+u &= \ln(\ln{x}) & \mathop{dv} &= 1 \\[1ex]
+\mathop{du} &= \frac{\mathop{dx}}{x\ln{x}} & v &= x \\[3ex]
+\end{align*}
+`
+
+$$`
+\begin{align*}
+\int{\frac{1}{\ln{x}} + x\ln(\ln{x})\mathop{dx}}&=\int{\frac{1}{\ln{x}}\mathop{dx}}+x\ln(\ln{x})-\int{\frac{x}{x\ln{x}}\mathop{dx}} \\[3ex]
+&=\int{\frac{1}{\ln{x}}\mathop{dx}}+x\ln(\ln{x})-\int{\frac{1}{\ln{x}}\mathop{dx}} \\[3ex]
+&=x\ln(\ln{x}) + C
+\end{align*}
+`
+
+``` =html
+</details>
+```
+
+``` =html
+<details>
+<summary>Problem 5
+```
+
+$$`\int{\frac{1}{1+\tan{x}}\mathop{dx}}`
+
+``` =html
+</summary>
+```
+\
+
+$$`
+\begin{align*}
+\int{\frac{1}{1+\tan{x}}\mathop{dx}}&=\frac{1}{2}\int{\frac{1+\tan{x}+1-\tan{x}}{1+\tan{x}}\mathop{dx}} \\[3ex]
+&=\int{\frac{1}{2}\mathop{dx}}+\frac{1}{2}\int{\frac{1-\tan{x}}{1+\tan{x}}\mathop{dx}} \\[3ex]
+&=\frac{1}{2}x+\frac{1}{2}\int{\frac{\cos{x}-\sin{x}}{\cos{x}+\sin{x}}\mathop{dx}} \\[3ex]
+&=\frac{1}{2}x+\frac{1}{2}\ln|\cos{x}+\sin{x}|+C \\[3ex]
 \end{align*}
 `
 
