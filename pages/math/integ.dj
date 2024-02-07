@@ -154,7 +154,7 @@ $$`
 <summary>Problem 4
 ```
 
-$$`\int{\frac{1}{\ln{x}} + x\ln(\ln{x})\mathop{dx}}`
+$$`\int{\frac{1}{\ln{x}} + \ln(\ln{x})\mathop{dx}}`
 
 ``` =html
 </summary>
@@ -170,7 +170,7 @@ u &= \ln(\ln{x}) & \mathop{dv} &= 1 \\[1ex]
 
 $$`
 \begin{align*}
-\int{\frac{1}{\ln{x}} + x\ln(\ln{x})\mathop{dx}}&=\int{\frac{1}{\ln{x}}\mathop{dx}}+x\ln(\ln{x})-\int{\frac{x}{x\ln{x}}\mathop{dx}} \\[3ex]
+\int{\frac{1}{\ln{x}} + \ln(\ln{x})\mathop{dx}}&=\int{\frac{1}{\ln{x}}\mathop{dx}}+x\ln(\ln{x})-\int{\frac{x}{x\ln{x}}\mathop{dx}} \\[3ex]
 &=\int{\frac{1}{\ln{x}}\mathop{dx}}+x\ln(\ln{x})-\int{\frac{1}{\ln{x}}\mathop{dx}} \\[3ex]
 &=x\ln(\ln{x}) + C
 \end{align*}
