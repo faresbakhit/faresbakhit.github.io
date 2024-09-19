@@ -1,0 +1,17 @@
+Hey stranger :), this is the humans.txt for my personal webpage.
+
+The idea of this file is to document the _humans_ behind a webpage
+that made it possible.
+
+I'm using [Hugo], a static site generator to build the site locally,
+review the contents, then publish it to GitHub pages.
+
+One particular project that I'm very glad exists is [KaTeX], the tool I use
+for pre-rendering math to HTML/CSS so you wouldn't have to do it client-side,
+let alone run any JavaScript.
+
+The stylesheet is a modified version of [Simple.css].
+
+[Hugo] https://gohugo.io/
+[KaTeX] https://katex.org/
+[Simple.css] https://simplecss.org/
