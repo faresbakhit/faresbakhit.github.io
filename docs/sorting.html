@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fares A. Bakhit</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.ico" sizes="16x16">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    #ctrl {
+      position: absolute;
+      padding: 1em;
+      background: #181818c0;
+      color: #ffffffC0;
+      border: #ffffffC0 1px solid;
+      margin: 2em;
+      width: 225px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: background-color 250ms linear;
+    }
+
+    #ctrl:hover {
+      background-color: #181818f0;
+      transition: background-color 250ms linear;
+    }
+
+    #app {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: end;
+      background: black;
+    }
+
+    .bar {
+      flex: 1;
+      background: white;
+    }
+
+    .yel {
+      background: yellow;
+    }
+
+    .gre {
+      background: green;
+    }
+
+    .red {
+      background: red;
+    }
+
+    datalist {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      writing-mode: vertical-lr;
+      width: 100%;
+    }
+
+    #ctrl > * {
+      width: 100%;
+    }
+
+    button, input, select {
+      background: #ffffffc0;
+      width: 100%;
+    }
+
+    button {
+      height: 40px;
+      border: none;
+    }
+
+    #stream {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="ctrl">
+    <button type="button" id="rand">Randomize Input</button>
+    <label>
+      Input Size (N)<br />
+      <input
+        type="range"
+        id="size"
+        list="size-markers"
+        max="99"
+        min="0" />
+      <datalist id="size-markers">
+        <option value="0" label="0"></option>
+        <option value="25" label="25"></option>
+        <option value="50" label="50"></option>
+        <option value="75" label="75"></option>
+        <option value="99" label="99"></option>
+      </datalist>
+    </label>
+    <div id="stream">
+      <button type="button" id="play">⏵ Play</button>
+      <button type="button" id="step">⏹ Step</button>
+    </div>
+    <label id="algo-label">
+      Sorting Algorithm<br />
+      <select id="algo">
+        <option value="selection">Selection Sort</option>
+        <option value="insertion">Insertion Sort</option>
+        <option value="bubble">Bubble Sort</option>
+      </select>
+    </label>
+    <label id="sps-label" style="display: none;">
+      Steps per second: <span id="sps-display"></span><br />
+      <input
+        type="range"
+        id="sps"
+        value="100"
+        max="1000"
+        min="1" />
+    </label>
+  </div>
+  <div id="app"></div>
+  <script>
+    const app = document.getElementById('app');
+    const inputSize = document.getElementById('size');
+    const inputAlgo = document.getElementById('algo');
+    const buttonRand = document.getElementById('rand');
+    const buttonPlay = document.getElementById('play');
+    const buttonStep = document.getElementById('step');
+    const inputSPS = document.getElementById('sps');
+    const labelSPS = document.getElementById('sps-label');
+    const labelAlgo = document.getElementById('algo-label');
+    const displaySPS = document.getElementById('sps-display');
+    const bars = [];
+    let sps = inputSPS.value;
+    let isPlaying = false;
+    let algo = null;
+
+    class SelectionSort {
+      constructor() {
+        this.i = 0;
+        this.min_index = 0;
+        this.n = 0;
+        this.initbarslength = bars.length;
+      }
+
+      step() {
+        if (this.initbarslength != bars.length) {
+          if (bars.length > this.initbarslength) {
+            for (let i = 0; i < this.n; i++) {
+              bars[i].rmGreen();
+            }
+          }
+          bars[this.min_index].rmRed();
+          if (this.i > 0) bars[this.i-1].rmYellow();
+          this.i = 0;
+          this.min_index = 0;
+          this.n = 0;
+          this.initbarslength = bars.length;
+          return;
+        }
+        if (this.n == bars.length) return;
+        if (this.i == bars.length) {
+          bars[this.min_index].swap(bars[this.n])
+          bars[this.n].paintGreen();
+          bars[this.min_index].rmRed();
+          bars[this.i - 1].rmYellow();
+          this.n += 1;
+          this.i = this.n;
+          this.min_index = this.i;
+          return;
+        }
+        if (this.i == this.n) {
+          bars[this.n].paintRed();
+        } else if (bars[this.i].height < bars[this.min_index].height) {
+          let x = this.min_index;
+          this.min_index = this.i;
+          bars[this.min_index].paintRed();
+          bars[x].rmRed();
+        } else {
+          bars[this.i].paintYellow();
+        }
+        if (this.i > 0) bars[this.i-1].rmYellow();
+        this.i += 1;
+      }
+
+      toString() {
+        return 'selection';
+      }
+    }
+
+    class InsertionSort {
+      constructor() {
+        this.n = 0;
+        this.i = 0;
+        this.key = bars[this.i].height;
+        this.initbarslength = bars.length;
+      }
+
+      step() {
+        if (this.i == bars.length) return;
+        if (this.n > 0) {
+          if (this.i == 0 || this.key > bars[this.i - 1].height) {
+            bars[this.i].height = this.key;
+            bars[this.i].paintGreen();
+            bars[this.i].rmRed();
+            this.i += this.n - 1;
+            this.n = 0;
+            return;
+          };
+          bars[this.i].height = bars[this.i - 1].height;
+          bars[this.i].rmRed();
+          bars[this.i].paintGreen();
+          bars[this.i-1].paintRed();
+          bars[this.i-1].rmGreen();
+          this.i -= 1;
+          this.n += 1;
+          return;
+        }
+        if (bars[this.i].height < this.key) {
+          bars[this.i].rmYellow();
+          bars[this.i].paintRed();
+          this.key = bars[this.i].height;
+          this.n += 1;
+          return;
+        }
+        this.key = bars[this.i].height;
+        bars[this.i].paintGreen();
+        if (this.i != bars.length - 1) bars[this.i+1].paintYellow();
+        this.i += 1;
+      }
+
+      toString() {
+        return 'insertion';
+      }
+    }
+
+    class BubbleSort {
+      constructor() {
+        this.i = 0;
+        this.n = 1;
+        this.selected = false;
+        this.initbarslength = bars.length;
+      }
+
+      step() {
+        if (this.initbarslength != bars.length) {
+          if (this.selected) {
+            bars[this.i].rmYellow();
+            bars[this.i + 1].rmYellow();
+            this.selected = false;
+          }
+          if (bars.length > this.initbarslength) {
+            for (let i = this.initbarslength - 1; i > this.initbarslength - this.n - 1; i--) {
+              bars[i].rmGreen();
+            }
+          }
+          this.i = 0;
+          this.n = 1;
+          this.initbarslength = bars.length;
+        }
+        if (this.i >= bars.length) return;
+        if (this.n > bars.length) return;
+        if (this.i == bars.length - this.n) {
+          bars[this.i].paintGreen();
+          if (this.i != 0) this.n += 1;
+          this.i = 0;
+          return;
+        }
+        if (!this.selected) {
+          bars[this.i].paintYellow();
+          bars[this.i + 1].paintYellow();
+          this.selected = true;
+          return;
+        }
+        if (bars[this.i].height > bars[this.i + 1].height) {
+          bars[this.i].swap(bars[this.i + 1]);
+        }
+        bars[this.i].rmYellow();
+        bars[this.i + 1].rmYellow();
+        this.i += 1;
+        this.selected = false;
+      }
+
+      toString() {
+        return 'bubble';
+      }
+    }
+
+    class Bar {
+      constructor(height) {
+        this.element = document.createElement('bar');
+        this.element.className = 'bar';
+        app.appendChild(this.element);
+        this.height = height;
+      }
+
+      get height() {
+        return this._height;
+      }
+
+      set height(height) {
+        this._height = height;
+        this.element.style.height = `${this.height}vh`;
+      }
+
+      swap(other) {
+        const height = other.height;
+        other.height = this.height;
+        this.height = height;
+      }
+
+      paintGreen() { this.element.classList.add('gre'); }
+      paintRed() { this.element.classList.add('red'); }
+      paintYellow() { this.element.classList.add('yel'); }
+      rmGreen() { this.element.classList.remove('gre'); }
+      rmRed() { this.element.classList.remove('red'); }
+      rmYellow() { this.element.classList.remove('yel'); }
+    }
+
+    function getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function populateBars(length) {
+      if (bars.length > length) for (let i = bars.length; i > length; i--) app.removeChild(bars.pop().element);
+      else if (bars.length < length) for (let i = bars.length; i < length; i++) bars.push(new Bar(getRandomInt(10, 90)));
+    }
+
+    function randomizeBars() {
+      for (let i = 0; i < bars.length; i++) {
+        bars[i].height = getRandomInt(10, 90);
+      }
+    }
+
+    function step(force = false) {
+      if (!force && !isPlaying) {
+        if (force) setTimeout(step, 1000/sps);
+        return;
+      }
+      if (algo === null || algo.toString() !== inputAlgo.value) {
+        for (let i = 0; i < bars.length; i++) {
+          bars[i].element.className = 'bar';
+        }
+        if (inputAlgo.value == 'selection') {
+          algo = new SelectionSort();
+        } else if (inputAlgo.value == 'insertion') {
+          algo = new InsertionSort();
+        } else if (inputAlgo.value == 'bubble') {
+          algo = new BubbleSort();
+        }
+      }
+      algo.step();
+      if (isPlaying) setTimeout(step, 1000/sps);
+    }
+
+    populateBars(inputSize.value);
+    inputSize.addEventListener('input', (event) => populateBars(inputSize.value));
+    inputSPS.addEventListener('input', (event) => {
+      sps = inputSPS.value;
+      displaySPS.innerText = inputSPS.value;
+    });
+    buttonRand.addEventListener('click', (event) => randomizeBars())
+    buttonStep.addEventListener('click', (event) => step(true))
+    buttonPlay.addEventListener('click', (event) => {
+      if (!isPlaying) {
+        buttonStep.style.display = 'none';
+        labelSPS.style.display = 'block';
+        labelAlgo.style.display = 'none'
+        displaySPS.innerText = inputSPS.value;
+        buttonPlay.innerText = '⏸ Pause';
+        isPlaying = true;
+        step();
+      } else {
+        buttonStep.style.display = 'inline-block';
+        labelSPS.style.display = 'none';
+        labelAlgo.style.display = 'block';
+        buttonPlay.innerText = '⏵ Play';
+        isPlaying = false;
+      }
+    })
+  </script>
+</body>
+
+</html>
