@@ -1,0 +1,217 @@
+@import "./fonts.css";
+
+:root {
+  --color-1: #fff;
+  --color-2: #000;
+  --color-3: #eaeef3;
+  --color-4: #00193a;
+  --color-5: #738191;
+  --color-6: #0048ab;
+  --color-7: #4c81c9;
+}
+
+*,:after,:before {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-1);
+  color: var(--color-2);
+  font-family: "Red Hat Text", "Amiri", system-ui, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+ul {
+  list-style-type: "- ";
+}
+
+body > header {
+  background: var(--color-4);
+  align-content: center;
+  padding: 1em;
+}
+
+body > header h1 {
+  margin: 0;
+  font-size: 2em;
+  color: var(--color-1);
+}
+
+main > header {
+  margin-bottom: 1rem;
+}
+
+main > header h1 {
+  margin-bottom: 0;
+}
+
+main > header time {
+  color: var(--color-5);
+  font-style: italic;
+}
+
+blockquote {
+  background-color: var(--color-3);
+  margin: 0;
+  padding: .4rem 1.8rem;
+  border-inline-start: .35rem solid var(--color-6);
+}
+
+blockquote p::before {
+  content: '\201C';
+}
+
+blockquote p::after {
+  content: '\201D';
+}
+
+blockquote footer {
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+body > footer {
+  border-top: 1px solid var(--color-5);
+  font-size: 1rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+body > footer p {
+  margin: 0;
+}
+
+main {
+  max-width: 56ch;
+  margin: 0;
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-top: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "DM Serif Display", "Amiri", serif;
+  text-wrap: balance;
+  color: var(--color-6);
+}
+
+a {
+  color: var(--color-6);
+  font-style: italic;
+  text-decoration-line: none;
+}
+
+a:hover {
+  text-decoration-line: underline;
+}
+
+a:focus {
+  outline: 0;
+  color: var(--color-1);
+  background-color: var(--color-6);
+  text-decoration: none;  
+}
+
+body > header h1 a,
+body > header h1 a:hover {
+  color: inherit;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.math svg {
+  vertical-align: middle;
+}
+
+div.math {
+  text-align: center;
+  overflow-x: auto;
+}
+
+code {
+  font-family: monospace;
+}
+
+pre code.hljs {
+  display:block;
+  overflow-x:auto;
+}
+
+.hljs {
+  color: var(--color-4);
+}
+
+.hljs-doctag,.hljs-keyword,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-strong,.hljs-title {
+  font-weight: 700;
+}
+
+.hljs-comment {
+  color: var(--color-5);
+}
+
+.hljs-addition,.hljs-built_in,.hljs-literal,.hljs-name,.hljs-quote,.hljs-section,.hljs-selector-class,.hljs-selector-id,.hljs-string,.hljs-tag,.hljs-title,.hljs-type {
+  color: var(--color-6);
+}
+
+.hljs-attribute,.hljs-bullet,.hljs-deletion,.hljs-link,.hljs-meta,.hljs-regexp,.hljs-subst,.hljs-symbol,.hljs-template-variable,.hljs-variable {
+  color: var(--color-7);
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 1rem;
+  }
+  body > header h1 {
+    font-size: 1.5rem;
+  }
+  body > footer {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  body > header {
+    text-align: center;
+  }
+  main {
+    margin: 0 auto;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-1: #111;
+    --color-2: #fff;
+    --color-3: #0e1217;
+    --color-4: #ccdae6;
+    --color-5: #748292;
+    --color-6: #7fc7ff;
+    --color-7: #558ad2;
+  }
+
+  body > header {
+    background: #336d99
+  }
+
+  body > header h1 {
+    color: #d3ecff;
+  }
+  .math svg {
+    filter: invert(88%) hue-rotate(180deg);
+  }
+}
+
+.home-blog {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
