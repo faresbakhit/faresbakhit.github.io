@@ -47,9 +47,31 @@ main > header h1 {
   margin-bottom: 0;
 }
 
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
 main > header time {
   color: var(--color-5);
   font-style: italic;
+}
+
+.discussion-links {
+  font-size: 0.95rem;
+  color: var(--color-5);
+}
+
+.discussion-links a {
+  color: var(--color-5);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.discussion-links a:hover {
+  color: var(--color-6);
 }
 
 blockquote {
